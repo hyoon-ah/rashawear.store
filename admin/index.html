@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<base href="../">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f3ee">
+<title>Admin RashaWear</title>
+<link rel="stylesheet" href="admin/admin.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="brand-mark">R</span><span><b>RASHAWEAR</b><small>ADMIN STUDIO</small></span></a>
+  <a class="store-link" href="index.html" target="_blank">Lihat Toko ↗</a>
+</header>
+<main class="wrap">
+  <section class="welcome">
+    <p class="eyebrow">RUANG KONTROL TOKO</p>
+    <h1>Halo, Rasha 👋</h1>
+    <p>Kelola produk dan tulisan toko langsung dari HP. Tidak perlu mengedit kode.</p>
+  </section>
+  <div class="notice"><b>Mode demo:</b> perubahan disimpan di browser/perangkat ini. Agar perubahan tampil untuk semua pelanggan dan tersinkron di HP/laptop, toko perlu dihubungkan ke database online dan login admin.</div>
+  <nav class="tabs">
+    <button class="tab active" data-tab="products">📦 Produk</button>
+    <button class="tab" data-tab="texts">✍️ Tulisan website</button>
+    <button class="tab" data-tab="backup">☁️ Pindah perangkat</button>
+  </nav>
+  <section class="panel active" id="panel-products">
+    <div class="section-title"><div><h2>Produk toko</h2><p id="productCount">Kelola koleksi RashaWear.</p></div><button class="primary" id="addProduct">＋ Tambah produk</button></div>
+    <div id="productList" class="product-list"></div>
+    <div class="empty hidden" id="emptyProducts">Belum ada produk. Tekan “Tambah produk” untuk mulai.</div>
+  </section>
+  <section class="panel" id="panel-texts">
+    <div class="section-title"><div><h2>Edit tulisan</h2><p>Ubah tulisan yang tampil di halaman utama.</p></div></div>
+    <form id="textForm" class="form-card">
+      <label>Pengumuman paling atas<input name="announcement" maxlength="140" placeholder="Contoh: Gratis ongkir Depok"></label>
+      <label>Judul utama — baris pertama<input name="heroLine1" maxlength="70"></label>
+      <label>Judul utama — kata penekanan<input name="heroEmphasis" maxlength="50"></label>
+      <label>Deskripsi utama<textarea name="heroDescription" rows="3" maxlength="350"></textarea></label>
+      <label>Teks tombol utama<input name="heroButton" maxlength="50"></label>
+      <label>Judul koleksi<input name="collectionTitle" maxlength="70"></label>
+      <label>Deskripsi koleksi<input name="collectionDescription" maxlength="180"></label>
+      <label>Teks tombol kedua<input name="heroButton2" maxlength="50"></label>
+      <label>Judul bagian capsule / bundle<input name="bundleTitle" maxlength="100"></label>
+      <label>Deskripsi bagian capsule<input name="bundleDescription" maxlength="220"></label>
+      <label>Judul testimoni<input name="testimonialsTitle" maxlength="100"></label>
+      <label>Judul Instagram<input name="instagramTitle" maxlength="100"></label>
+      <label>Judul bagian checkout<input name="checkoutTitle" maxlength="100"></label>
+      <label>Deskripsi bagian checkout<input name="checkoutDescription" maxlength="180"></label>
+      <label>Judul newsletter / footer<input name="newsletterTitle" maxlength="100"></label>
+      <label>Deskripsi newsletter<input name="newsletterDescription" maxlength="180"></label>
+      <label>Deskripsi brand di footer<textarea name="footerDescription" rows="3" maxlength="300"></textarea></label>
+      <label>Alamat / lokasi footer<input name="footerLocation" maxlength="100"></label>
+      <label>Jam operasional footer<input name="footerHours" maxlength="80"></label>
+      <label>Email footer<input name="footerEmail" maxlength="100"></label>
+      <label>Teks copyright<input name="copyrightText" maxlength="140"></label>
+      <button class="primary full" type="submit">Simpan semua tulisan</button>
+    </form>
+    <div class="form-card image-editor" style="margin-top:14px">
+      <h3>Ganti foto bagian website</h3>
+      <p class="small">Pilih foto dari galeri HP. Foto akan disimpan di browser ini dan langsung dipakai di halaman toko.</p>
+      <label>Foto hero utama<input type="file" id="heroMainUpload" accept="image/*"><img class="site-image-preview" id="heroMainPreview" alt="Pratinjau hero utama"></label>
+      <label>Foto hero detail<input type="file" id="heroDetailUpload" accept="image/*"><img class="site-image-preview" id="heroDetailPreview" alt="Pratinjau hero detail"></label>
+      <label>Foto capsule / bundle<input type="file" id="bundleUpload" accept="image/*"><img class="site-image-preview" id="bundlePreview" alt="Pratinjau bundle"></label>
+      <label>Foto Instagram 1<input type="file" id="insta1Upload" accept="image/*"><img class="site-image-preview" id="insta1Preview" alt="Pratinjau Instagram 1"></label>
+      <label>Foto Instagram 2<input type="file" id="insta2Upload" accept="image/*"><img class="site-image-preview" id="insta2Preview" alt="Pratinjau Instagram 2"></label>
+      <label>Foto Instagram 3<input type="file" id="insta3Upload" accept="image/*"><img class="site-image-preview" id="insta3Preview" alt="Pratinjau Instagram 3"></label>
+    </div>
+  </section>
+  <section class="panel" id="panel-backup">
+    <div class="section-title"><div><h2>Cadangan & perangkat</h2><p>Gunakan file cadangan untuk memindahkan perubahan demo.</p></div></div>
+    <div class="form-card backup-card">
+      <div class="backup-icon">⇧</div><h3>Ekspor data</h3><p>Unduh produk, foto yang diunggah, dan tulisan sebagai file cadangan JSON.</p><button class="primary full" id="exportBtn">Unduh cadangan</button>
+      <div class="divider"></div>
+      <div class="backup-icon">⇩</div><h3>Impor data</h3><p>Pilih file cadangan JSON yang sebelumnya diekspor. Data lokal saat ini akan diganti.</p>
+      <label class="file-button">Pilih file cadangan<input type="file" id="importFile" accept=".json,application/json"></label>
+      <p class="small" id="backupStatus" aria-live="polite"></p>
+    </div>
+  </section>
+  <footer>RashaWear Admin Studio · dibuat untuk penggunaan yang mudah di HP</footer>
+</main>
+
+<dialog id="productDialog">
+  <form id="productForm" class="dialog-form">
+    <div class="dialog-head"><div><p class="eyebrow">KATALOG TOKO</p><h2 id="dialogTitle">Tambah produk</h2></div><button type="button" class="close" id="closeDialog" aria-label="Tutup">×</button></div>
+    <input type="hidden" name="id">
+    <label>Nama produk *<input name="name" required maxlength="90" placeholder="Contoh: Timeless Pashmina"></label>
+    <div class="two">
+      <label>Harga (Rp) *<input name="price" required type="number" min="0" step="1000" inputmode="numeric" placeholder="89000"></label>
+      <label>Harga lama (opsional)<input name="oldPrice" type="number" min="0" step="1000" inputmode="numeric" placeholder="110000"></label>
+    </div>
+    <label>Kategori<select name="cat"><option value="hijab">Hijab Essential</option><option value="dress">Timeless Dress</option><option value="atasan">Essential Top</option><option value="oneset">The Set</option></select></label>
+    <label>Deskripsi produk<textarea name="description" rows="3" maxlength="600" placeholder="Jelaskan bahan, potongan, dan keunggulan produk..."></textarea></label>
+    <div class="two"><label>Total stok (otomatis)<input name="stock" type="number" min="0" step="1" inputmode="numeric" readonly><small>Dihitung dari jumlah stok setiap warna di bawah.</small></label><label>Ukuran tersedia<input name="sizes" maxlength="120" placeholder="S, M, L, XL"></label></div>
+    <div class="variant-heading"><b>Warna, stok & foto per varian</b><small>Setiap warna punya stok sendiri dan bisa memiliki beberapa foto. Pilih beberapa foto sekaligus dari galeri HP.</small></div>
+    <div id="variantList" class="variant-list"></div>
+    <button type="button" class="secondary full" id="addVariant">＋ Tambah warna / varian</button>
+    <label>Foto utama cadangan (opsional)<input type="file" name="photo" id="photoInput" accept="image/*" capture="environment"><small>Dipakai sebagai foto utama jika varian belum memiliki foto. Foto varian di atas tetap terpisah.</small></label>
+    <div class="preview-wrap"><img id="photoPreview" alt="Pratinjau foto utama"><span id="previewPlaceholder">Pratinjau foto utama akan muncul di sini</span></div>
+    <label class="check"><input type="checkbox" name="removePhoto"> Hapus foto utama lama</label>
+    <label>Label kecil (opsional)<input name="badge" maxlength="30" placeholder="Timeless"></label>
+    <div class="dialog-actions"><button type="button" class="secondary" id="cancelDialog">Batal</button><button class="primary" type="submit">Simpan produk</button></div>
+    <p class="small" id="formError" role="alert"></p>
+  </form>
+</dialog>
+<div class="toast" id="toast" role="status"></div>
+<script src="admin/admin.js"></script>
+</body></html>
